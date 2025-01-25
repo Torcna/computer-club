@@ -71,7 +71,7 @@ jobs:
 
     - name: Run tests
       run: |
-       if [[ "$RUNNER_OS" == "Windows" ]]; then
+       if [ "$RUNNER_OS" == "Windows" ]; then
           echo "Running test.exe on Windows..."
           ${GITHUB_WORKSPACE}\\bin\\Release\\tests.exe
        else
