@@ -68,12 +68,11 @@ jobs:
        fi
 
     - name: Run tests
-      working-directory: ${{ steps.strings.outputs.build-output-dir }}
       run: |
        if [[ "$RUNNER_OS" == "Windows" ]]; then
           echo "Running test.exe on Windows..."
-         .\bin\Release\tests.exe
+          ${GITHUB_WORKSPACE}\bin\Release\tests.exe
        else
          echo "Running test on Linux..."
-         ./bin/tests
+         ${GITHUB_WORKSPACE}/bin/tests
        fi
