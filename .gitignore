@@ -1,0 +1,6 @@
+#BUILD
+build/
+bin/
+
+#THIRDPARTY
+gtest/

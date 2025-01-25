@@ -1,0 +1,15 @@
+4
+10:00 20:00
+15
+09:59 1 emma
+10:00 1 emma
+10:10 1 frank
+10:15 2 emma 1
+10:20 2 frank 2
+10:25 1 grace
+10:30 2 grace 3
+10:35 4 emma
+10:45 4 grace
+10:50 1 hannah
+10:55 2 hannah 2
+11:00 4 hannah
