@@ -58,5 +58,6 @@ jobs:
     - name: Build
       run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
 
-    - name: Run tests
-      run: ctest --build-config ${{ matrix.build_type }} --output-on-failure
+    - name: Run Tests
+      working-directory: ${{ steps.strings.outputs.build-output-dir }}  # Папка с билдом
+      run: ctest --build-config ${{ matrix.build_type }}  # Запуск ctest с указанием конфигурации
