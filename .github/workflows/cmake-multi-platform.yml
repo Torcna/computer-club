@@ -62,7 +62,7 @@ jobs:
       run: |
        if [ "$RUNNER_OS" == "Windows" ]; then
          echo "Listing contents of bin directory on Windows..."
-         dir ${GITHUB_WORKSPACE}\bin
+         dir ${GITHUB_WORKSPACE}\\bin
        else
          echo "Listing contents of bin directory on Linux..."
          ls -l ${GITHUB_WORKSPACE}/bin
@@ -73,7 +73,7 @@ jobs:
       run: |
        if [[ "$RUNNER_OS" == "Windows" ]]; then
           echo "Running test.exe on Windows..."
-          ${GITHUB_WORKSPACE}\bin\Release\tests.exe
+          ${GITHUB_WORKSPACE}\\bin\\Release\\tests.exe
        else
          echo "Running test on Linux..."
          ${GITHUB_WORKSPACE}/bin/tests
