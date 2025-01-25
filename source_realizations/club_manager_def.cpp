@@ -1,7 +1,6 @@
 #include "header_club_manager.hpp"
 
-    std::string
-    format_time(size_t time) {
+std::string format_time(size_t time) {
   size_t hours = time / 60;
   size_t minutes = time % 60;
   std::ostringstream oss;
