@@ -149,8 +149,15 @@ bool club_work_manager::handle_event_id_3(const event& ev) {
     return false;
   }
   // waiting over nothing?
-  bool all_desks_busy =
-      std::all_of(desks.begin(), desks.end(), [](const computer_desk& desk) { return desk.is_busy_rn; });
+  bool all_desks_busy = true;
+
+  for (auto& t : desks) {
+    if (!t.is_busy_rn) {
+      all_desks_busy = false;
+      break;
+    }
+  }
+
   if (!all_desks_busy) {
     event err_event = {ev.time, 13, "ICanWaitNoLonger!"};
     os << err_event;

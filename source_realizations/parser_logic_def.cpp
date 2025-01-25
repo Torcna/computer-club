@@ -1,6 +1,4 @@
 #include "parser_logic.hpp"
-
-
 bool parser::is_valid_time(const std::string& time, size_t& hours, size_t& minutes) {
   if (time.size() != 5 || time[2] != ':') return false;
 
@@ -27,9 +25,6 @@ bool parser::is_valid_username(const std::string& username) {
 
   return true;
 }
-
-
-
 bool parser::validate_and_parse(std::istream& input, input_data& data) {
   std::string line;
 
