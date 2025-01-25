@@ -1,7 +1,7 @@
 #include "parser_logic.hpp"
 
 
-bool parser::is_valid_time(const std::string& time, int& hours, int& minutes) {
+bool parser::is_valid_time(const std::string& time, size_t& hours, size_t& minutes) {
   if (time.size() != 5 || time[2] != ':') return false;
 
   try {
@@ -58,7 +58,7 @@ bool parser::validate_and_parse(std::istream& input, input_data& data) {
   }
   std::istringstream lineStream(line);
   std::string temp;
-  int hours, minutes;
+  size_t hours, minutes;
   lineStream >> temp;
   if (!is_valid_time(temp, hours, minutes)) {
     os << line << std::endl;
@@ -106,7 +106,7 @@ bool parser::validate_and_parse(std::istream& input, input_data& data) {
       return false;
     }
 
-    int hours_ev, minutes_ev;
+    size_t hours_ev, minutes_ev;
 
     if (!is_valid_time(time, hours_ev, minutes_ev) || (id < 0 || id > 4)) {
       os << line << std::endl;

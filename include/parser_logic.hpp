@@ -9,7 +9,7 @@
 
 class parser {
   std::ostream& os;
-  bool is_valid_time(const std::string& time, int& hours, int& minutes);
+  bool is_valid_time(const std::string& time, size_t& hours, size_t& minutes);
   bool is_valid_username(const std::string& username);
 
  public:

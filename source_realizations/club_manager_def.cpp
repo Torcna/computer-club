@@ -1,6 +1,7 @@
 #include "header_club_manager.hpp"
 
-std::string format_time(size_t time) {
+    std::string
+    format_time(size_t time) {
   size_t hours = time / 60;
   size_t minutes = time % 60;
   std::ostringstream oss;
@@ -66,7 +67,8 @@ size_t club_work_manager::client_leaves_desk(size_t client_id, const event& ev, 
 bool club_work_manager::remove_client_from_queue(size_t client_id) {
   bool flag = false;
   std::queue<size_t> temp_q;
-  for (int i = 0, sz = clients_waiting_for_desks.size(); i != sz; ++i) {
+  size_t sz = clients_waiting_for_desks.size();
+  for (int i = 0; i != sz; ++i) {
     auto temp_el = clients_waiting_for_desks.front();
     if (temp_el != client_id) {
       temp_q.push(temp_el);
