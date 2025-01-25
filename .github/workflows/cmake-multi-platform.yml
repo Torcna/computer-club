@@ -60,21 +60,20 @@ jobs:
 
     - name: List bin directory contents
       run: |
+       echo "Listing contents of bin directory..."
        if [[ "$RUNNER_OS" == "Windows" ]]; then
-          echo "Listing contents of bin directory on Windows..."
-          dir .\bin  # Для Windows
+         dir ${GITHUB_WORKSPACE}\bin  # Для Windows
        else
-          echo "Listing contents of bin directory on Linux..."
-          ls -l ./bin  # Для Linux
+         ls -l ${GITHUB_WORKSPACE}/bin  # Для Linux
        fi
 
     - name: Run tests
       working-directory: ${{ steps.strings.outputs.build-output-dir }}
       run: |
-        if [[ "$RUNNER_OS" == "Windows" ]]; then
-         echo "Running test.exe on Windows..."
+       if [[ "$RUNNER_OS" == "Windows" ]]; then
+          echo "Running test.exe on Windows..."
          .\bin\Release\test.exe  # Для Windows
-        else
+       else
          echo "Running test on Linux..."
-         ./bin/test.out  # Для Linux
-        fi
+         ./bin/test  # Для Linux
+       fi
