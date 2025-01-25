@@ -72,8 +72,8 @@ jobs:
       run: |
        if [[ "$RUNNER_OS" == "Windows" ]]; then
           echo "Running test.exe on Windows..."
-         .\bin\Release\test.exe  # Для Windows
+         .\bin\Release\tests.exe
        else
          echo "Running test on Linux..."
-         ./bin/test  # Для Linux
+         ./bin/tests
        fi
