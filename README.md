@@ -1,43 +1,41 @@
-# Инструкция по сборке
+# Build Instructions
 
-1. Клонируйте репозиторий:
+1. Clone the repository:
    ```bash
    git clone https://github.com/Torcna/computer-club.git
-2. Обновите и инициализируйте git submodules:
+2. Update and initialize git submodules:
    ```bash
    git submodule update --init --recursive
-3. Создайте две директории: bin и build:
+3. Create two directories: bin and build:
    ```bash
    mkdir bin && mkdir build
-4. Перейдите в директорию build и выполните генерацию проекта:
+4. Navigate to the build directory and run the project generation:
    ```bash
    cd build && cmake ..
-5. Соберите проект в режиме Release:
+5. Build the project in Release mode:
    ```bash
    cmake --build . --config Release
 
-Готово! Теперь у вас есть собранный проект.
+Done! Now you have a built project.
 
-# Исполняемые файлы
+# Executable Files
 
-После сборки проекта в директории `bin` будут находиться два исполняемых файла:
+After building the project, two executable files will be located in the `bin` directory:
 
 1. **club**  
-   Это основной исполняемый файл. Для его работы необходимо передать через пробел один аргумент — название файла с входными данными.  
-   Пример запуска:
+   This is the main executable file. To run it, you need to provide a single argument — the name of the input data file. Example:
    ```bash
    ./club data_default.txt
-Входные данные должны находиться в директории files_for_main_task/. Вы можете использовать готовые файлы из этой директории или добавить свои.
+Input data should be located in the files_for_main_task/ directory. You can use the provided files from this directory or add your own.
 
 2. **tests**   
-   Это бинарный файл, который запускает тесты, реализованные с использованием Google Test.
-   Для его работы не требуется никаких дополнительных аргументов. Просто запустите файл:
+   This is the binary that runs the tests implemented with Google Test. No additional arguments are needed. Simply run the fil
    ```bash
    ./tests
 
-Тесты используют входные данные из директории files_for_tests/.
+Tests will use input data from the files_for_tests/ directory.
 
-# Структура Проекта
+# Project Structure
 
 ![heheh](https://github.com/user-attachments/assets/87192843-305d-45cc-9bba-78a5639bc7b9)
 
