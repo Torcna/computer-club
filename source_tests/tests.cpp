@@ -131,7 +131,6 @@ TEST(function_tests_correct_work, fuction_test_6) {
   club_work_manager manager(input_data_main, std::cout);
 
   ASSERT_TRUE(manager.event_flow_handler());
-  manager.print_events();
 }
 
 TEST(function_tests_correct_work, fuction_test_7) {
@@ -144,5 +143,4 @@ TEST(function_tests_correct_work, fuction_test_7) {
   club_work_manager manager(input_data_main, std::cout);
 
   ASSERT_TRUE(manager.event_flow_handler());
-  manager.print_events();
 }
