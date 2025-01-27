@@ -120,3 +120,29 @@ TEST(function_tests_correct_work, fuction_test_5) {
 
   ASSERT_TRUE(manager.event_flow_handler());
 }
+
+TEST(function_tests_correct_work, fuction_test_6) {
+  std::ifstream inputFile(man.get_test_path(FUNC_TESTS_PATH, "test6.txt"));
+  input_data input_data_main;
+  parser p;
+  EXPECT_TRUE(p.validate_and_parse(inputFile, input_data_main));
+  inputFile.close();
+
+  club_work_manager manager(input_data_main, std::cout);
+
+  ASSERT_TRUE(manager.event_flow_handler());
+  manager.print_events();
+}
+
+TEST(function_tests_correct_work, fuction_test_7) {
+  std::ifstream inputFile(man.get_test_path(FUNC_TESTS_PATH, "test7.txt"));
+  input_data input_data_main;
+  parser p;
+  EXPECT_TRUE(p.validate_and_parse(inputFile, input_data_main));
+  inputFile.close();
+
+  club_work_manager manager(input_data_main, std::cout);
+
+  ASSERT_TRUE(manager.event_flow_handler());
+  manager.print_events();
+}

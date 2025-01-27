@@ -55,6 +55,7 @@ size_t club_work_manager::client_leaves_desk(size_t client_id, const event& ev, 
       // collect statistics
       desks[i].time_spent_total += minutes_elapsed;
       desks[i].is_busy_rn = false;
+      desks[i].client_id = 0;
       clients_using_desks.erase(client_id);
       desk_used = true;
       return i;
@@ -148,15 +149,38 @@ bool club_work_manager::handle_event_id_3(const event& ev) {
     os << error_event;
     return false;
   }
-  // waiting over nothing?
-  bool all_desks_busy = true;
 
-  for (auto& t : desks) {
-    if (!t.is_busy_rn) {
-      all_desks_busy = false;
-      break;
+  // leaves desk?
+  bool desk_used = false;
+  size_t desk_id = client_leaves_desk(client_id, ev, desk_used);
+
+  bool all_desks_busy = true;
+  // no need to iterate whole desks vec for this
+  if (desk_used) {
+    all_desks_busy = false;
+  } else {
+    for (auto& t : desks) {
+      if (!t.is_busy_rn) {
+        all_desks_busy = false;
+        break;
+      }
     }
   }
+  if (desk_used && !clients_waiting_for_desks.empty()) {
+    auto& desk = desks[desk_id];
+    size_t client_id = clients_waiting_for_desks.front();
+    clients_waiting_for_desks.pop();
+    desk.client_id = client_id;
+    desk.time = ev.time;
+    desk.is_busy_rn = true;
+    clients_using_desks.insert(client_id);
+    event event_to_print = {ev.time, 12, id_manager_inner.get_name(client_id) + " " + std::to_string(desk_id + 1)};
+    os << event_to_print;
+    return true;
+  }
+  // order of these checks forces id 13 to appear every time client wants to wait after work.
+  // May be its fine
+  // Still i think that it breaks all logic, `cause this generates 2 additional event
 
   if (!all_desks_busy) {
     event err_event = {ev.time, 13, "ICanWaitNoLonger!"};

@@ -34,7 +34,3 @@ target_compile_definitions(tests PRIVATE PROJECT_ROOT="${PROJECT_ROOT}")
 
 
 target_link_libraries(tests gtest)
-
-enable_testing()
-
-add_test(NAME RunTests COMMAND ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/test.exe)
