@@ -52,6 +52,7 @@ class club_work_manager {
   void print_desk_statistics(std::ostream& os);  // desks statistics to os
 
  public:
+  size_t gimme_desk1() { return desks[0].total_cash; }
   club_work_manager(input_data& data, std::ostream& ost);
 
   bool event_flow_handler();  // main function

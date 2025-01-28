@@ -36,4 +36,4 @@ int main(int argc, char** argv) {
     manager.print_events();
   }
   return 0;
-}
+}   

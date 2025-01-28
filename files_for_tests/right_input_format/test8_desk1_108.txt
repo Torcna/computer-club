@@ -2,8 +2,12 @@
 09:00 21:00
 12
 09:05 1 ava
+09:06 1 bvb
+09:07 1 cvc
 09:10 1 william
 09:15 2 ava 1
+09:15 2 bvb 2
+09:15 2 cvc 3
 09:20 2 william 1
 09:25 1 mia
 09:30 2 mia 1
@@ -11,8 +15,8 @@
 09:45 2 elijah 1
 10:00 3 william
 10:05 3 mia
-09:45 3 elijah
-14:00 4 ava
+10:45 3 elijah
+14:00 3 ava
 16:00 4 mia
 16:05 4 william
 17:00 4 elijah

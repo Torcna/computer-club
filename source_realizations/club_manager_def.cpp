@@ -155,9 +155,8 @@ bool club_work_manager::handle_event_id_3(const event& ev) {
   size_t desk_id = client_leaves_desk(client_id, ev, desk_used);
 
   bool all_desks_busy = true;
-  // no need to iterate whole desks vec for this
   if (desk_used) {
-    all_desks_busy = false;
+    all_desks_busy = false;  // no need to iterate whole desks vec for this
   } else {
     for (auto& t : desks) {
       if (!t.is_busy_rn) {
@@ -166,37 +165,54 @@ bool club_work_manager::handle_event_id_3(const event& ev) {
       }
     }
   }
-  if (desk_used && !clients_waiting_for_desks.empty()) {
-    auto& desk = desks[desk_id];
-    size_t client_id = clients_waiting_for_desks.front();
-    clients_waiting_for_desks.pop();
-    desk.client_id = client_id;
-    desk.time = ev.time;
-    desk.is_busy_rn = true;
-    clients_using_desks.insert(client_id);
-    event event_to_print = {ev.time, 12, id_manager_inner.get_name(client_id) + " " + std::to_string(desk_id + 1)};
-    os << event_to_print;
-    return true;
-  }
-  // order of these checks forces id 13 to appear every time client wants to wait after work.
-  // May be its fine
-  // Still i think that it breaks all logic, `cause this generates 2 additional event
+  // order of following checks forces id 13 to appear when queue isn`t full
+  // May be this way its fine
+  // Still i think that it breaks all logic, `cause this generates 2 events:
+  // if client used desk and generated id 3 while queue is full
+  // it `ll cause id 11 leave
+  // id 12 to sit, b`cause it`d be not efficient to let them wait while desk is free, right?
+  if (desk_used) {
+    size_t sz = clients_waiting_for_desks.size();
+    if (sz < input_data_screen.table_count) {
+      // desk is free and he`s trying to get in the queue
 
-  if (!all_desks_busy) {
-    event err_event = {ev.time, 13, "ICanWaitNoLonger!"};
-    os << err_event;
-    return false;
+      event err_event = {ev.time, 13, "ICanWaitNoLonger!"};
+      os << err_event;
+    } else {
+      id_manager_inner.remove_client(username);   // there are 1 comp and 1 client in queue
+      event err_event = {ev.time, 11, username};  // its alright to send him home,right?
+      os << err_event;
+    }
+    if (sz != 0) {
+      // let first one to take desk
+      auto& desk = desks[desk_id];
+      size_t client_id = clients_waiting_for_desks.front();
+      clients_waiting_for_desks.pop();
+      desk.client_id = client_id;
+      desk.time = ev.time;
+      desk.is_busy_rn = true;
+      clients_using_desks.insert(client_id);
+      event event_to_print = {ev.time, 12, id_manager_inner.get_name(client_id) + " " + std::to_string(desk_id + 1)};
+      os << event_to_print;
+      return true;
+    }
+  } else {
+    if (clients_waiting_for_desks.size() >= input_data_screen.table_count) {
+      id_manager_inner.remove_client(username);  // check if removes properly
+      event err_event = {ev.time, 11, username};
+      os << err_event;
+      return false;
+    }
+    // there are desk why wait?
+    if (!all_desks_busy) {
+      event err_event = {ev.time, 13, "ICanWaitNoLonger!"};
+      os << err_event;
+      return false;
+    }
+
+    clients_waiting_for_desks.push(client_id);
   }
 
-  // queue is overloaded?
-  if (clients_waiting_for_desks.size() > input_data_screen.table_count) {
-    id_manager_inner.remove_client(username);  // check if removes properly
-    event err_event = {ev.time, 11, username};
-    os << err_event;
-    return false;
-  }
-
-  clients_waiting_for_desks.push(client_id);
   return true;
 }
 

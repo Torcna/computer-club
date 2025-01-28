@@ -63,7 +63,7 @@ TEST(test_validation, validation_pass_on_normal_data) {
   inputFile.close();
 }
 
-TEST(function_tests_correct_work, fuction_test_1) {
+TEST(test_run, test_1) {
   std::ifstream inputFile(man.get_test_path(FUNC_TESTS_PATH, "test1.txt"));
   input_data input_data_main;
   parser p;
@@ -75,7 +75,7 @@ TEST(function_tests_correct_work, fuction_test_1) {
   ASSERT_TRUE(manager.event_flow_handler());
 }
 
-TEST(function_tests_correct_work, fuction_test_2) {
+TEST(test_run, test_2) {
   std::ifstream inputFile(man.get_test_path(FUNC_TESTS_PATH, "test2.txt"));
   input_data input_data_main;
   parser p;
@@ -86,7 +86,7 @@ TEST(function_tests_correct_work, fuction_test_2) {
 
   ASSERT_TRUE(manager.event_flow_handler());
 }
-TEST(function_tests_correct_work, fuction_test_3) {
+TEST(test_run, test_3) {
   std::ifstream inputFile(man.get_test_path(FUNC_TESTS_PATH, "test3.txt"));
   input_data input_data_main;
   parser p;
@@ -97,7 +97,7 @@ TEST(function_tests_correct_work, fuction_test_3) {
 
   ASSERT_TRUE(manager.event_flow_handler());
 }
-TEST(function_tests_correct_work, fuction_test_4) {
+TEST(test_run, test_4) {
   std::ifstream inputFile(man.get_test_path(FUNC_TESTS_PATH, "test4.txt"));
   input_data input_data_main;
   parser p;
@@ -109,7 +109,7 @@ TEST(function_tests_correct_work, fuction_test_4) {
   ASSERT_TRUE(manager.event_flow_handler());
 }
 
-TEST(function_tests_correct_work, fuction_test_5) {
+TEST(test_run, test_5) {
   std::ifstream inputFile(man.get_test_path(FUNC_TESTS_PATH, "test5.txt"));
   input_data input_data_main;
   parser p;
@@ -121,7 +121,7 @@ TEST(function_tests_correct_work, fuction_test_5) {
   ASSERT_TRUE(manager.event_flow_handler());
 }
 
-TEST(function_tests_correct_work, fuction_test_6) {
+TEST(test_run, test_6) {
   std::ifstream inputFile(man.get_test_path(FUNC_TESTS_PATH, "test6.txt"));
   input_data input_data_main;
   parser p;
@@ -133,7 +133,7 @@ TEST(function_tests_correct_work, fuction_test_6) {
   ASSERT_TRUE(manager.event_flow_handler());
 }
 
-TEST(function_tests_correct_work, fuction_test_7) {
+TEST(test_run, test_7) {
   std::ifstream inputFile(man.get_test_path(FUNC_TESTS_PATH, "test7.txt"));
   input_data input_data_main;
   parser p;
@@ -143,4 +143,55 @@ TEST(function_tests_correct_work, fuction_test_7) {
   club_work_manager manager(input_data_main, std::cout);
 
   ASSERT_TRUE(manager.event_flow_handler());
+}
+
+TEST(test_run, test_8) {
+  std::ifstream inputFile(man.get_test_path(FUNC_TESTS_PATH, "test8_desk1_108.txt"));
+  input_data input_data_main;
+  parser p;
+  EXPECT_TRUE(p.validate_and_parse(inputFile, input_data_main));
+  inputFile.close();
+
+  club_work_manager manager(input_data_main, std::cout);
+
+  EXPECT_TRUE(manager.event_flow_handler());
+  ASSERT_EQ(manager.gimme_desk1(),108);
+}
+
+TEST(test_run, test_9) {
+  std::ifstream inputFile(man.get_test_path(FUNC_TESTS_PATH, "test9_desk1_96.txt"));
+  input_data input_data_main;
+  parser p;
+  EXPECT_TRUE(p.validate_and_parse(inputFile, input_data_main));
+  inputFile.close();
+
+  club_work_manager manager(input_data_main, std::cout);
+
+  EXPECT_TRUE(manager.event_flow_handler());
+  ASSERT_EQ(manager.gimme_desk1(), 96);
+}
+
+TEST(test_run, test_10) {
+  std::ifstream inputFile(man.get_test_path(FUNC_TESTS_PATH, "test10_desk1_10.txt"));
+  input_data input_data_main;
+  parser p;
+  EXPECT_TRUE(p.validate_and_parse(inputFile, input_data_main));
+  inputFile.close();
+
+  club_work_manager manager(input_data_main, std::cout);
+
+  EXPECT_TRUE(manager.event_flow_handler());
+  ASSERT_EQ(manager.gimme_desk1(), 10);
+}
+TEST(test_run, test_11) {
+  std::ifstream inputFile(man.get_test_path(FUNC_TESTS_PATH, "test11_desk1_20.txt"));
+  input_data input_data_main;
+  parser p;
+  EXPECT_TRUE(p.validate_and_parse(inputFile, input_data_main));
+  inputFile.close();
+
+  club_work_manager manager(input_data_main, std::cout);
+
+  EXPECT_TRUE(manager.event_flow_handler());
+  ASSERT_EQ(manager.gimme_desk1(), 20);
 }
